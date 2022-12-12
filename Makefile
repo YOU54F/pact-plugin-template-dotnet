@@ -54,7 +54,7 @@ compile_move: compile move_to_plugin_folder
 PLATFORM 				:=
 ARCH 				:=
 ifeq '$(findstring ;,$(PATH))' ';'
-	PLATFORM=windows
+	PLATFORM=win
 	ifeq ($(PROCESSOR_ARCHITECTURE),AMD64)
 		ARCH=aarch64
 	endif
