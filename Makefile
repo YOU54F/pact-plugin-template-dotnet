@@ -59,11 +59,11 @@ ifeq '$(findstring ;,$(PATH))' ';'
 		ARCH=aarch64
 	endif
 	ifeq ($(PROCESSOR_ARCHITECTURE),x86)
-		ARCH=x86_64
+		ARCH=x64
 	endif
 	UNAME_P := $(shell uname -m)
 	ifeq ($(UNAME_P),x86_64)
-		ARCH=x86_64
+		ARCH=x64
 	endif
 	ifneq ($(filter arm%,$(UNAME_P)),)
 		ARCH=aarch64
@@ -85,7 +85,7 @@ else
 	endif
 	UNAME_P := $(shell uname -m)
 	ifeq ($(UNAME_P),x86_64)
-		ARCH=x86_64
+		ARCH=x64
 	endif
 	ifneq ($(filter arm%,$(UNAME_P)),)
 		ARCH=arm64

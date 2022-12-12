@@ -1,6 +1,6 @@
 # Pact Plugin Template
 
-<img src="https://user-images.githubusercontent.com/19932401/206557102-f5141b7d-a4f4-441b-84f6-ede3552c4696.png" height="3.5%" width="3.5%"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Dart_programming_language_logo.svg/2560px-Dart_programming_language_logo.svg.png" height=5% width="10%">
+<img src="https://user-images.githubusercontent.com/19932401/206557102-f5141b7d-a4f4-441b-84f6-ede3552c4696.png" height="3.5%" width="3.5%"><img src="https://dotnet.microsoft.com/static/images/redesign/social/square.png" height="3.5%" width="3.5%">
 
 
 Template project to help bootstrap a new Pact [Plugin](https://github.com/pact-foundation/pact-plugins) for the [Pact](http://docs.pact.io) framework. 
@@ -48,7 +48,8 @@ Template project to help bootstrap a new Pact [Plugin](https://github.com/pact-f
 
 The protoc compiler must be installed for this plugin 
 
-See Dart specific instructions [here](https://github.com/google/protobuf.dart/tree/master/protoc_plugin#how-to-build)
+See .NET specific instructions [here](https://github.com/grpc/grpc-dotnet#to-start-using-grpc-for-net)
+and the official Microsoft docs [page](https://learn.microsoft.com/en-us/aspnet/core/grpc/protobuf?view=aspnetcore-7.0) for knowledge about construction Protobuf messages in .NET
 
 ### Create your new repository
 
@@ -147,7 +148,7 @@ mattResponse := `{"response":{"body":"world"}}`
 
 #### Implement the relevant RPC functions
 
-Open [`plugin.dart`](./plugin.dart) and update the relevant RPC functions. 
+Open [`PactPluginService.cs`](./Services/PactPluginService.cs) and update the relevant RPC functions. 
 
 Depending on your use case, some of the RPC calls won't be required, each method is well signposted to help you along.
 
@@ -197,11 +198,13 @@ You can then reference your plugin in local tests to try it out.
 
 If a new protobuf definition is required (e.g. to support a new feature), copy it into the `Protos` folder and run the following Make task:
 
+> Need to add annotation in the protofile `option csharp_namespace = "GrpcPactPlugin"` for an idiomatic naming convention for C#
+
 ```
 make proto
 ```
 
-It will update the definitions in the `./proto/plugin.*.dart` packages. Note this may result in a breaking change, depending on the version. So upgrade carefully and ensure you have appropriate tests
+It will update the definitions in the `./obj/Debug/net6.0` packages. Note this may result in a breaking change, depending on the version. So upgrade carefully and ensure you have appropriate tests
 
 ## Supported targets
 
@@ -215,3 +218,12 @@ This code base should automatically create artifacts for the following OS/Archit
 | Linux   | arm          | ✅         |
 | Windows | x86_64       | ✅         |
 | Windows | arm          | ✅         |
+
+## .NET Development notes
+
+1. Install .NET 6+
+2. Open the Project.
+3. Run `dotnet run`
+4. Build with `dotnet build`
+   1. Different options for different archs `https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-build`
+   2. For full list see https://github.com/dotnet/runtime/blob/main/src/libraries/Microsoft.NETCore.Platforms/src/runtime.json

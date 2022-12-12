@@ -49,7 +49,7 @@ jobs:
       - run: test_build
       - run: curl https://i.jpillora.com/ktr0731/evans@v0.10.9! | bash
         shell: bash
-      - run: run_build
+      - run: make build
         shell: bash
       - uses: actions/setup-node@v3
       - if: runner.os != 'Windows'
@@ -70,6 +70,8 @@ jobs:
 
 # Packaging stuff
 
+      - name: Prepare Artifacts
+        run: make x-plat
       - name: Prepare Artifacts
         run: make prepare
 
