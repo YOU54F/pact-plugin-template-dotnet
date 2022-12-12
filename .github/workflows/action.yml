@@ -46,7 +46,7 @@ jobs:
         with:
           dotnet-version: 6.0.x
       - run: make compile
-      - run: test_build
+      - run: make test_build
       - run: curl https://i.jpillora.com/ktr0731/evans@v0.10.9! | bash
         shell: bash
       - run: make build
