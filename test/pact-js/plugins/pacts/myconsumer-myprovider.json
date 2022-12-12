@@ -1,0 +1,74 @@
+{
+  "consumer": {
+    "name": "myconsumer"
+  },
+  "interactions": [
+    {
+      "description": "an HTTP request to /matt",
+      "key": "b6c5b973534175ec",
+      "pending": false,
+      "providerStates": [
+        {
+          "name": "the Matt protocol exists"
+        }
+      ],
+      "request": {
+        "body": {
+          "content": "MATThelloMATT",
+          "contentType": "application/matt",
+          "contentTypeHint": "DEFAULT",
+          "encoded": false
+        },
+        "headers": {
+          "content-type": [
+            "application/matt"
+          ]
+        },
+        "method": "POST",
+        "path": "/matt"
+      },
+      "response": {
+        "body": {
+          "content": "MATTworldMATT",
+          "contentType": "application/matt",
+          "contentTypeHint": "DEFAULT",
+          "encoded": false
+        },
+        "headers": {
+          "content-type": [
+            "application/matt"
+          ]
+        },
+        "status": 200
+      },
+      "type": "Synchronous/HTTP"
+    }
+  ],
+  "metadata": {
+    "pact-js": {
+      "version": "10.4.0"
+    },
+    "pactRust": {
+      "ffi": "0.3.15",
+      "models": "1.0.1"
+    },
+    "pactSpecification": {
+      "version": "4.0"
+    },
+    "plugins": [
+      {
+        "configuration": {},
+        "name": "dotnet-template",
+        "version": "0.0.0"
+      },
+      {
+        "configuration": {},
+        "name": "dart-template",
+        "version": "0.0.0"
+      }
+    ]
+  },
+  "provider": {
+    "name": "myprovider"
+  }
+}

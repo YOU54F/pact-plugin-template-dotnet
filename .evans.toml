@@ -1,0 +1,4 @@
+[default]
+protoFile = ["Protos/plugin.proto"]
+package = "io.pact.plugin"
+service = "PactPlugin"
