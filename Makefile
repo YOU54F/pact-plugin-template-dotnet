@@ -19,10 +19,10 @@ run_local:
 	dotnet run
 
 run_build:
-	./bin/Debug/net6.0/GrpcPactPlugin
+	./GrpcPactPlugin
 
 test_build:
-	./bin/Debug/net6.0/GrpcPactPlugin & _pid=$$!; \
+	./GrpcPactPlugin & _pid=$$!; \
     sleep 3 && ./evans.sh; kill $$_pid
 
 .PHONY: bin build
