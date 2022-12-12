@@ -29,7 +29,7 @@ test_build:
 
 
 compile: clean
-	dotnet build -o build/${PLATFORM}/${ARCH} --arch ${ARCH} --os $(PLATFORM)
+	dotnet publish -o build/${PLATFORM}/${ARCH} --arch ${ARCH} --os $(PLATFORM)
 	cp build/${PLATFORM}/${ARCH}/${APP_NAME} .
 
 compress:
@@ -104,9 +104,9 @@ detect_os:
 	@echo $(PLATFORM) $(ARCH)
 
 x-plat:
-	dotnet build -o build/osx/aarch64/${PROJECT} --arch arm64 --os osx
-	dotnet build -o build/osx/x86_64/${PROJECT} --arch x64 --os osx
-	dotnet build -o build/linux/aarch64/${PROJECT} --arch arm64 --os linux
-	dotnet build -o build/linux/x86_64/${PROJECT} --arch x64 --os linux
-	dotnet build -o build/windows/aarch64/${PROJECT} --arch arm64 --os win
-	dotnet build -o build/windows/x86_64/${PROJECT} --arch x64 --os win
+	dotnet publish -o build/osx/aarch64/${PROJECT} --arch arm64 --os osx
+	dotnet publish -o build/osx/x86_64/${PROJECT} --arch x64 --os osx
+	dotnet publish -o build/linux/aarch64/${PROJECT} --arch arm64 --os linux
+	dotnet publish -o build/linux/x86_64/${PROJECT} --arch x64 --os linux
+	dotnet publish -o build/windows/aarch64/${PROJECT} --arch arm64 --os win
+	dotnet publish -o build/windows/x86_64/${PROJECT} --arch x64 --os win
