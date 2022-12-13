@@ -46,6 +46,8 @@ jobs:
         with:
           dotnet-version: 6.0.x
       - run: make compile
+      - if: runner.os = "Windows"
+        run: mkdir -p /usr/local/bin
       - run: curl https://i.jpillora.com/ktr0731/evans@v0.10.9! | bash
       - run: make test_build
         shell: bash
