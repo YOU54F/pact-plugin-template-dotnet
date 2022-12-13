@@ -35,7 +35,7 @@ compile: clean
 compress:
 	gzip -c build/${PLATFORM}/${ARCH}/${PROJECT} > dist/release/pact-${PROJECT}-plugin-${PLATFORM}-${ARCH}.gz
 
-prepare: compress generate_manifest
+prepare: generate_manifest
 
 
 install_local: compile move_to_plugin_folder
