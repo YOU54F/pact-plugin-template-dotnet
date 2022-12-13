@@ -35,7 +35,7 @@ jobs:
       run:
         shell: bash
     env:
-      PORT: 50051
+      # PORT: 50051
       PROJECT: dotnet-template
     steps:
       - uses: actions/checkout@v3

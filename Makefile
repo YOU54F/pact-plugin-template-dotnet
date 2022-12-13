@@ -56,7 +56,7 @@ ARCH 				:=
 ifeq '$(findstring ;,$(PATH))' ';'
 	PLATFORM=win
 	ifeq ($(PROCESSOR_ARCHITECTURE),AMD64)
-		ARCH=aarch64
+		ARCH=arm64
 	endif
 	ifeq ($(PROCESSOR_ARCHITECTURE),x86)
 		ARCH=x64
@@ -66,10 +66,10 @@ ifeq '$(findstring ;,$(PATH))' ';'
 		ARCH=x64
 	endif
 	ifneq ($(filter arm%,$(UNAME_P)),)
-		ARCH=aarch64
+		ARCH=arm64
 	endif
 	ifneq ($(filter aarch64%,$(UNAME_P)),)
-		ARCH=aarch64
+		ARCH=arm64
 	endif
 else
 	PLATFORM:=$(shell uname 2>/dev/null || echo Unknown)
