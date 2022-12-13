@@ -80,37 +80,37 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: pact-${{ env.PROJECT }}-plugin-windows-aarch64.gz
-          path: dist/release/pact-${{ env.PROJECT }}-plugin-windows-aarch64.gz
+          path: dist/release/pact-${{ env.PROJECT }}-plugin-win-arm64.gz
       - name: Upload Artifacts - windows-x86_64
         if: runner.os == 'Windows'
         uses: actions/upload-artifact@v3
         with:
           name: pact-${{ env.PROJECT }}-plugin-windows-x86_64.gz
-          path: dist/release/pact-${{ env.PROJECT }}-plugin-windows-x86_64.gz
+          path: dist/release/pact-${{ env.PROJECT }}-plugin-win-x64.gz
       - name: Upload Artifacts - linux-x86_64
         if: runner.os == 'Linux'
         uses: actions/upload-artifact@v3
         with:
           name: pact-${{ env.PROJECT }}-plugin-linux-x86_64.gz
-          path: dist/release/pact-${{ env.PROJECT }}-plugin-linux-x86_64.gz
-      - name: Upload Artifacts - osx-aarch64
-        if: runner.os == 'macOS'
+          path: dist/release/pact-${{ env.PROJECT }}-plugin-linux-x64.gz
+      - name: Upload Artifacts - linux-aarch64
+        if: runner.os == 'Linux'
         uses: actions/upload-artifact@v3
         with:
-          name: pact-${{ env.PROJECT }}-plugin-osx-aarch64.gz
-          path: dist/release/pact-${{ env.PROJECT }}-plugin-osx-aarch64.gz
+          name: pact-${{ env.PROJECT }}-plugin-linux-aarch64.gz
+          path: dist/release/pact-${{ env.PROJECT }}-plugin-osx-arm64.gz
       - name: Upload Artifacts - osx-x86_64
         if: runner.os == 'macOS'
         uses: actions/upload-artifact@v3
         with:
           name: pact-${{ env.PROJECT }}-plugin-osx-x86_64.gz
-          path: dist/release/pact-${{ env.PROJECT }}-plugin-osx-x86_64.gz
+          path: dist/release/pact-${{ env.PROJECT }}-plugin-osx-x64.gz
       - name: Upload Artifacts - osx-aarch64
         if: runner.os == 'macOS'
         uses: actions/upload-artifact@v3
         with:
           name: pact-${{ env.PROJECT }}-plugin-osx-aarch64.gz
-          path: dist/release/pact-${{ env.PROJECT }}-plugin-osx-x86_64.gz
+          path: dist/release/pact-${{ env.PROJECT }}-plugin-osx-arm64.gz
       - name: Upload Artifacts - Manifest
         if: runner.os == 'Linux'
         uses: actions/upload-artifact@v3

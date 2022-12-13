@@ -104,9 +104,9 @@ detect_os:
 	@echo $(PLATFORM) $(ARCH)
 
 x-plat:
-	dotnet publish -o build/osx/aarch64/${PROJECT} --arch arm64 --os osx
-	dotnet publish -o build/osx/x86_64/${PROJECT} --arch x64 --os osx
-	dotnet publish -o build/linux/aarch64/${PROJECT} --arch arm64 --os linux
-	dotnet publish -o build/linux/x86_64/${PROJECT} --arch x64 --os linux
-	dotnet publish -o build/windows/aarch64/${PROJECT} --arch arm64 --os win
-	dotnet publish -o build/windows/x86_64/${PROJECT} --arch x64 --os win
+	dotnet publish -o build/osx/arm64/${PROJECT} --arch arm64 --os osx
+	dotnet publish -o build/osx/x64/${PROJECT} --arch x64 --os osx
+	dotnet publish -o build/linux/arm64/${PROJECT} --arch arm64 --os linux
+	dotnet publish -o build/linux/x64/${PROJECT} --arch x64 --os linux
+	dotnet publish -o build/win/arm64/${PROJECT} --arch arm64 --os win
+	dotnet publish -o build/win/x64/${PROJECT} --arch x64 --os win
