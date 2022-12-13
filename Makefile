@@ -103,10 +103,22 @@ detect_os:
 	@echo $(shell uname -p)
 	@echo $(PLATFORM) $(ARCH)
 
-x-plat:
+x-plat: clean
 	dotnet publish -o build/osx/arm64/${PROJECT} --arch arm64 --os osx
 	dotnet publish -o build/osx/x64/${PROJECT} --arch x64 --os osx
 	dotnet publish -o build/linux/arm64/${PROJECT} --arch arm64 --os linux
 	dotnet publish -o build/linux/x64/${PROJECT} --arch x64 --os linux
 	dotnet publish -o build/win/arm64/${PROJECT} --arch arm64 --os win
 	dotnet publish -o build/win/x64/${PROJECT} --arch x64 --os win
+	mkdir -p dist
+	mkdir -p dist/release
+	mkdir -p dist/linux/x86_64
+	mkdir -p dist/windows/x86_64
+	mkdir -p dist/osx/x86_64
+	mkdir -p dist/osx/aarch64
+	gzip -c build/osx/x64/${PROJECT} > dist/release/pact-${PROJECT}-plugin-osx-x86_64.gz
+	gzip -c build/osx/arm64/${PROJECT} > dist/release/pact-${PROJECT}-plugin-osx-aarch64.gz
+	gzip -c build/linux/x64/${PROJECT} > dist/release/pact-${PROJECT}-plugin-linux-x86_64.gz
+	gzip -c build/linux/arm64/${PROJECT} > dist/release/pact-${PROJECT}-plugin-linux-aarch64.gz
+	gzip -c build/win/x64/${PROJECT} > dist/release/pact-${PROJECT}-plugin-windows-x86_64.gz
+	gzip -c build/win/arm64/${PROJECT} > dist/release/pact-${PROJECT}-plugin-windows-aarch64.gz
