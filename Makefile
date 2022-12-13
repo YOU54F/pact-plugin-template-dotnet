@@ -120,5 +120,5 @@ x-plat: clean
 	gzip -c build/osx/arm64/${PROJECT}/${APP_NAME} > dist/release/pact-${PROJECT}-plugin-osx-aarch64.gz
 	gzip -c build/linux/x64/${PROJECT}/${APP_NAME} > dist/release/pact-${PROJECT}-plugin-linux-x86_64.gz
 	gzip -c build/linux/arm64/${PROJECT}/${APP_NAME} > dist/release/pact-${PROJECT}-plugin-linux-aarch64.gz
-	gzip -c build/win/x64/${PROJECT}/${APP_NAME} > dist/release/pact-${PROJECT}-plugin-windows-x86_64.gz
-	gzip -c build/win/arm64/${PROJECT}/${APP_NAME} > dist/release/pact-${PROJECT}-plugin-windows-aarch64.gz
+	gzip -c build/win/x64/${PROJECT}/${APP_NAME}.exe > dist/release/pact-${PROJECT}-plugin-windows-x86_64.gz
+	gzip -c build/win/arm64/${PROJECT}/${APP_NAME}.exe > dist/release/pact-${PROJECT}-plugin-windows-aarch64.gz
