@@ -5,6 +5,10 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
       <OutputType>Exe</OutputType>
+      <PublishSingleFile>true</PublishSingleFile>
+      <SelfContained>true</SelfContained>
+      <PublishReadyToRun>true</PublishReadyToRun>
+      <DefaultItemExcludes>$(DefaultItemExcludes);test\**\*;build\**\*;appsettings*</DefaultItemExcludes>
   </PropertyGroup>
 
   <ItemGroup>

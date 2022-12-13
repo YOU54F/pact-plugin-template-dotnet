@@ -35,7 +35,7 @@ jobs:
       run:
         shell: bash
     env:
-      PORT: 50051
+      # PORT: 50051
       PROJECT: dotnet-template
     steps:
       - uses: actions/checkout@v3
@@ -46,10 +46,12 @@ jobs:
         with:
           dotnet-version: 6.0.x
       - run: make compile
-      - run: test_build
-      - run: curl https://i.jpillora.com/ktr0731/evans@v0.10.9! | bash
+      - if: runner.os != 'Windows'
+        run: curl https://i.jpillora.com/ktr0731/evans@v0.10.9! | bash
+      - if: runner.os != 'Windows'
+        run: make test_build
         shell: bash
-      - run: run_build
+      - run: make build
         shell: bash
       - uses: actions/setup-node@v3
       - if: runner.os != 'Windows'
@@ -71,6 +73,8 @@ jobs:
 # Packaging stuff
 
       - name: Prepare Artifacts
+        run: make x-plat
+      - name: Prepare Artifacts
         run: make prepare
 
       - name: Upload Artifacts - windows-aarch64
@@ -91,11 +95,11 @@ jobs:
         with:
           name: pact-${{ env.PROJECT }}-plugin-linux-x86_64.gz
           path: dist/release/pact-${{ env.PROJECT }}-plugin-linux-x86_64.gz
-      - name: Upload Artifacts - osx-aarch64
-        if: runner.os == 'macOS'
+      - name: Upload Artifacts - linux-aarch64
+        if: runner.os == 'Linux'
         uses: actions/upload-artifact@v3
         with:
-          name: pact-${{ env.PROJECT }}-plugin-osx-aarch64.gz
+          name: pact-${{ env.PROJECT }}-plugin-linux-aarch64.gz
           path: dist/release/pact-${{ env.PROJECT }}-plugin-osx-aarch64.gz
       - name: Upload Artifacts - osx-x86_64
         if: runner.os == 'macOS'
@@ -108,7 +112,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: pact-${{ env.PROJECT }}-plugin-osx-aarch64.gz
-          path: dist/release/pact-${{ env.PROJECT }}-plugin-osx-x86_64.gz
+          path: dist/release/pact-${{ env.PROJECT }}-plugin-osx-aarch64.gz
       - name: Upload Artifacts - Manifest
         if: runner.os == 'Linux'
         uses: actions/upload-artifact@v3

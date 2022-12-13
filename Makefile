@@ -19,23 +19,23 @@ run_local:
 	dotnet run
 
 run_build:
-	./bin/Debug/net6.0/GrpcPactPlugin
+	./GrpcPactPlugin
 
 test_build:
-	./bin/Debug/net6.0/GrpcPactPlugin & _pid=$$!; \
+	./GrpcPactPlugin & _pid=$$!; \
     sleep 3 && ./evans.sh; kill $$_pid
 
 .PHONY: bin build
 
 
 compile: clean
-	dotnet build -o build/${PLATFORM}/${ARCH} --arch ${ARCH} --os $(PLATFORM)
+	dotnet publish -o build/${PLATFORM}/${ARCH} --arch ${ARCH} --os $(PLATFORM)
 	cp build/${PLATFORM}/${ARCH}/${APP_NAME} .
 
 compress:
 	gzip -c build/${PLATFORM}/${ARCH}/${PROJECT} > dist/release/pact-${PROJECT}-plugin-${PLATFORM}-${ARCH}.gz
 
-prepare: compress generate_manifest
+prepare: generate_manifest
 
 
 install_local: compile move_to_plugin_folder
@@ -54,22 +54,22 @@ compile_move: compile move_to_plugin_folder
 PLATFORM 				:=
 ARCH 				:=
 ifeq '$(findstring ;,$(PATH))' ';'
-	PLATFORM=windows
+	PLATFORM=win
 	ifeq ($(PROCESSOR_ARCHITECTURE),AMD64)
-		ARCH=aarch64
+		ARCH=arm64
 	endif
 	ifeq ($(PROCESSOR_ARCHITECTURE),x86)
-		ARCH=x86_64
+		ARCH=x64
 	endif
 	UNAME_P := $(shell uname -m)
 	ifeq ($(UNAME_P),x86_64)
-		ARCH=x86_64
+		ARCH=x64
 	endif
 	ifneq ($(filter arm%,$(UNAME_P)),)
-		ARCH=aarch64
+		ARCH=arm64
 	endif
 	ifneq ($(filter aarch64%,$(UNAME_P)),)
-		ARCH=aarch64
+		ARCH=arm64
 	endif
 else
 	PLATFORM:=$(shell uname 2>/dev/null || echo Unknown)
@@ -85,7 +85,7 @@ else
 	endif
 	UNAME_P := $(shell uname -m)
 	ifeq ($(UNAME_P),x86_64)
-		ARCH=x86_64
+		ARCH=x64
 	endif
 	ifneq ($(filter arm%,$(UNAME_P)),)
 		ARCH=arm64
@@ -103,10 +103,22 @@ detect_os:
 	@echo $(shell uname -p)
 	@echo $(PLATFORM) $(ARCH)
 
-x-plat:
-	dotnet build -o build/osx/aarch64/${PROJECT} --arch arm64 --os osx
-	dotnet build -o build/osx/x86_64/${PROJECT} --arch x64 --os osx
-	dotnet build -o build/linux/aarch64/${PROJECT} --arch arm64 --os linux
-	dotnet build -o build/linux/x86_64/${PROJECT} --arch x64 --os linux
-	dotnet build -o build/windows/aarch64/${PROJECT} --arch arm64 --os win
-	dotnet build -o build/windows/x86_64/${PROJECT} --arch x64 --os win
+x-plat: clean
+	dotnet publish -o build/osx/arm64/${PROJECT} --arch arm64 --os osx
+	dotnet publish -o build/osx/x64/${PROJECT} --arch x64 --os osx
+	dotnet publish -o build/linux/arm64/${PROJECT} --arch arm64 --os linux
+	dotnet publish -o build/linux/x64/${PROJECT} --arch x64 --os linux
+	dotnet publish -o build/win/arm64/${PROJECT} --arch arm64 --os win
+	dotnet publish -o build/win/x64/${PROJECT} --arch x64 --os win
+	mkdir -p dist
+	mkdir -p dist/release
+	mkdir -p dist/linux/x86_64
+	mkdir -p dist/windows/x86_64
+	mkdir -p dist/osx/x86_64
+	mkdir -p dist/osx/aarch64
+	gzip -c build/osx/x64/${PROJECT}/${APP_NAME} > dist/release/pact-${PROJECT}-plugin-osx-x86_64.gz
+	gzip -c build/osx/arm64/${PROJECT}/${APP_NAME} > dist/release/pact-${PROJECT}-plugin-osx-aarch64.gz
+	gzip -c build/linux/x64/${PROJECT}/${APP_NAME} > dist/release/pact-${PROJECT}-plugin-linux-x86_64.gz
+	gzip -c build/linux/arm64/${PROJECT}/${APP_NAME} > dist/release/pact-${PROJECT}-plugin-linux-aarch64.gz
+	gzip -c build/win/x64/${PROJECT}/${APP_NAME}.exe > dist/release/pact-${PROJECT}-plugin-windows-x86_64.gz
+	gzip -c build/win/arm64/${PROJECT}/${APP_NAME}.exe > dist/release/pact-${PROJECT}-plugin-windows-aarch64.gz
