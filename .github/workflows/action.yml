@@ -48,7 +48,8 @@ jobs:
       - run: make compile
       - if: runner.os != 'Windows'
         run: curl https://i.jpillora.com/ktr0731/evans@v0.10.9! | bash
-      - run: make test_build
+      - if: runner.os != 'Windows'
+        run: make test_build
         shell: bash
       - run: make build
         shell: bash
